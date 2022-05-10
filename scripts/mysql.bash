@@ -1,0 +1,1 @@
+mysqldump --user=$1 --password=$2 --host=$3 $4 > $5
