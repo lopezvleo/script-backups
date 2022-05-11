@@ -1,0 +1,1 @@
+PGPASSWORD=$1 pg_dump -U $2 -h $3 $4 > $5
