@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 """
 * Made by: Leonel López
 * Email: lalopez@cultura.gob.sv
