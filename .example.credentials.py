@@ -46,4 +46,5 @@ onedrive = {
 onedrive_tenant_id = 'tenant_id'
 
 # If remove_local_copy enabled, the backups directory will be deleted after upload
+# Leave in false if you are using git, in true the .gitignore will be deleted
 remove_local_copy = False
