@@ -6,7 +6,7 @@
 """
 
 from datetime import datetime
-from libs.backup import mysql
+from libs.backup import mysql, postgresql, mongodb
 from libs.log import insert_log
 from credentials import credentials
 
@@ -22,8 +22,16 @@ def create_backup():
         db_selected = credentials[db]
 
         if db_selected['driver'] == "mysql":
-            insert_log("MySql Database selected ["+db_selected['database']+"]")
+            insert_log("MySQL database selected ["+db_selected['database']+"]", True)
             mysql(db_selected)
+        
+        if db_selected['driver'] == "postgresql":
+            insert_log("PostgreSQL database selected ["+db_selected['database']+"]", True)
+            postgresql(db_selected)
+
+        if db_selected['driver'] == "mongodb":
+            insert_log("MongoDB database selected ["+db_selected['database']+"]", True)
+            mongodb(db_selected)
 
 
 __init__()

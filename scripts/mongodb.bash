@@ -1,0 +1,1 @@
+mongodump --host $1 --port $2 --db $3  --authenticationDatabase admin --username $4 --password $5 --gzip --archive > $6

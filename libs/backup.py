@@ -22,11 +22,11 @@ def mysql(db_selected):
     """
     Arguments to be passed: 
 
-    1st - Username
-    2nd - Password
-    3rd - Host
-    4th - Database
-    5th - Path of the backup
+    - Username
+    - Password
+    - Host
+    - Database
+    - Path of the backup
     """
 
     insert_log("Creating backup...")
@@ -36,6 +36,51 @@ def mysql(db_selected):
 
     os.system("./scripts/mysql.bash " + db_selected['user'] + " '" + db_selected['password'] +
               "' " + db_selected['host'] + " " + db_selected['database'] + " " + path_backup)
+
+    insert_log("Backup successfully created in " + directory)
+    upload_file(directory)
+
+
+def postgresql(db_selected):
+    """
+    Arguments to be passed: 
+
+    - Password
+    - Username
+    - Host
+    - Database
+    - Path of the backup
+    """
+
+    insert_log("Creating backup...")
+    directory = str(absolute_path) + "/backups/"
+    path_backup = directory + \
+        db_selected['database'] + "_" + str(date)+".psql"
+
+    os.system("./scripts/postgresql.bash " + db_selected['password'] + " " + db_selected['user'] + " " + db_selected['host'] + " " + db_selected['database'] + " " + path_backup)
+
+    insert_log("Backup successfully created in " + directory)
+    upload_file(directory)
+
+
+def mongodb(db_selected):
+    """
+    Arguments to be passed: 
+
+    - Host
+    - Port
+    - Database
+    - Username
+    - Password
+    - Path of the backup
+    """
+
+    insert_log("Creating backup...")
+    directory = str(absolute_path) + "/backups/"
+    path_backup = directory + \
+        db_selected['database'] + "_" + str(date)+".gz"
+
+    os.system("./scripts/mongodb.bash " + db_selected['host'] + " " + db_selected['port'] + " " + db_selected['database'] + " " + db_selected['user'] + " " + " " + db_selected['password'] + " " + path_backup)
 
     insert_log("Backup successfully created in " + directory)
     upload_file(directory)

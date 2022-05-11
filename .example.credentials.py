@@ -7,10 +7,26 @@
 
 # Databases to be backed up
 credentials = {
-    "database_name": {
+    "mysql_db": {
         "database": "database_name",
         "host": "127.0.0.1",
         "driver": "mysql",
+        "user": "user",
+        "password": "password"
+    },
+    "postgres_db": {
+        "database": "postgres_db",
+        "host": "127.0.0.1",
+        "port": "5432",
+        "driver": "postgresql",
+        "user": "user",
+        "password": "password"
+    },
+    "mongo_db": {
+        "database": "mongo_db",
+        "host": "127.0.0.1",
+        "port": "27017",
+        "driver": "mongodb",
         "user": "user",
         "password": "password"
     },

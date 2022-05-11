@@ -14,7 +14,11 @@ def insert_log(log_string="", header=False):
     # if it's the first string to be inserted, will create the header in the file
     if(header):
         now = datetime.now()
-        log_file.write("\n"+str(now) + " - " + log_string + "\n")
+        log = "\n"+str(now) + " - " + log_string + "\n"
+        print(log)
+        log_file.write(log)
         return
 
-    log_file.write(log_string + "\n")
+    log = log_string + "\n"
+    print(log)
+    log_file.write(log)
