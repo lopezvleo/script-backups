@@ -30,22 +30,25 @@ def upload_file(directory):
     response = requests.get(URL, headers=headers)
     json_data = json.loads(response.text)
 
-    insert_log("Uploading file(s) to "+URL)
+    # insert_log("Uploading file(s) to "+URL)
 
     for root, dirs, files in os.walk(directory):
         for file_name in files:
-            file_path = os.path.join(root, file_name)
-            insert_log("Uploading "+file_name+" to OneDrive...")
+            # if(file_name == '.gitignore'):
+            #     print(file_name)
+            if(file_name != '.gitignore'):
+                file_path = os.path.join(root, file_name)
+                insert_log("Uploading "+file_name+" to OneDrive...")
 
-            fileHandle = open(file_path, 'rb')
-            response = requests.put(URL+"/"+file_name+":/content",
-                                    data=fileHandle, headers=headers)
-            fileHandle.close()
+                fileHandle = open(file_path, 'rb')
+                response = requests.put(URL+"/"+file_name+":/content",
+                                        data=fileHandle, headers=headers)
+                fileHandle.close()
 
-            # If remove_local_copy enabled, the backups directory will be deleted after upload
-            if remove_local_copy and response.status_code == 200 or response.status_code == 201:
-                # remove folder contents
-                insert_log("Succeeded, removing original file...")
-                os.remove(os.path.join(root, file_name))
+                # If remove_local_copy enabled, the backups directory will be deleted after upload
+                if remove_local_copy and response.status_code == 200 or response.status_code == 201:
+                    # remove folder contents
+                    insert_log("Succeeded, removing original file...")
+                    os.remove(os.path.join(root, file_name))
 
     insert_log("File succesfully uploaded")

@@ -1,12 +1,3 @@
-#!/usr/bin/env bash
-
-"""
-* Made by: Leonel López
-* Email: lalopez@cultura.gob.sv
-* Date: 5/10/2022
-* Description: Function to create backups for: MySql, PostgreSQL and MongoDB.
-"""
-
 from datetime import datetime
 from libs.backup import mysql, postgresql, mongodb
 from libs.log import insert_log
@@ -24,15 +15,18 @@ def create_backup():
         db_selected = credentials[db]
 
         if db_selected['driver'] == "mysql":
-            insert_log("MySQL database selected ["+db_selected['database']+"]", True)
+            insert_log(
+                "MySQL database selected ["+db_selected['database']+"]", True)
             mysql(db_selected)
-        
+
         if db_selected['driver'] == "postgresql":
-            insert_log("PostgreSQL database selected ["+db_selected['database']+"]", True)
+            insert_log(
+                "PostgreSQL database selected ["+db_selected['database']+"]", True)
             postgresql(db_selected)
 
         if db_selected['driver'] == "mongodb":
-            insert_log("MongoDB database selected ["+db_selected['database']+"]", True)
+            insert_log(
+                "MongoDB database selected ["+db_selected['database']+"]", True)
             mongodb(db_selected)
 
 

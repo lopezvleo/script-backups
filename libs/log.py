@@ -13,7 +13,7 @@ absolute_path = pathlib.Path(__file__).parent.parent.resolve()
 
 
 def insert_log(log_string="", header=False):
-    print(str(absolute_path)+"/logs/logs_backup.log")
+    # print(str(absolute_path)+"/logs/logs_backup.log")
     log_file = open(str(absolute_path)+"/logs/logs_backup.log", 'a')
 
     # if it's the first string to be inserted, will create the header in the file
