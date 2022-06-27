@@ -1,13 +1,21 @@
 from datetime import datetime
+import os
+import pathlib
 from libs.backup import mysql, postgresql, mongodb
 from libs.log import insert_log
 from credentials import credentials
+from libs.onedrive import upload_file
+
+absolute_path = str(pathlib.Path(__file__).parent.parent.resolve())
+directory = os.path.join(str(absolute_path), "backups")
 
 
 def __init__():
     insert_log("Starting the backup script", True)
     # Creating the backup file
     create_backup()
+    # print(directory)
+    upload_file(directory)
 
 
 def create_backup():

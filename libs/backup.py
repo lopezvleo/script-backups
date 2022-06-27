@@ -1,15 +1,8 @@
-"""
-* Made by: Leonel López
-* Email: lalopez@cultura.gob.sv
-* Date: 5/10/2022
-* Description: Scripts to create the backups of the databases.
-"""
-
 import os
 from datetime import datetime
 import pathlib
-from libs.onedrive import upload_file
 from libs.log import insert_log
+from libs.onedrive import upload_single_file
 
 # Getting the path of the current folder
 absolute_path = str(pathlib.Path(__file__).parent.parent.resolve())
@@ -29,14 +22,13 @@ def mysql(db_selected):
 
     insert_log("Creating backup...")
     directory = str(absolute_path) + "/backups/"
-    path_backup = directory + \
-        db_selected['database'] + "_" + str(date)+".sql"
+    file_name = db_selected['database'] + "_" + str(date)+".sql"
+    path_backup = directory + file_name
 
     os.system("bash " + absolute_path + "/scripts/mysql.bash " + db_selected['user'] + " '" + db_selected['password'] +
               "' " + db_selected['host'] + " " + db_selected['database'] + " " + path_backup)
 
     insert_log("Backup successfully created in " + directory)
-    upload_file(directory)
 
 
 def postgresql(db_selected):
@@ -52,13 +44,13 @@ def postgresql(db_selected):
 
     insert_log("Creating backup...")
     directory = str(absolute_path) + "/backups/"
-    path_backup = directory + \
-        db_selected['database'] + "_" + str(date)+".psql"
+    file_name = db_selected['database'] + "_" + str(date)+".sql"
+    path_backup = directory + file_name
 
-    os.system("bash " + absolute_path + "/scripts/postgresql.bash " + db_selected['password'] + " " + db_selected['user'] + " " + db_selected['host'] + " " + db_selected['database'] + " " + path_backup)
+    os.system("bash " + absolute_path + "/scripts/postgresql.bash " +
+              db_selected['password'] + " " + db_selected['user'] + " " + db_selected['host'] + " " + db_selected['database'] + " " + path_backup)
 
     insert_log("Backup successfully created in " + directory)
-    upload_file(directory)
 
 
 def mongodb(db_selected):
@@ -75,10 +67,10 @@ def mongodb(db_selected):
 
     insert_log("Creating backup...")
     directory = str(absolute_path) + "/backups/"
-    path_backup = directory + \
-        db_selected['database'] + "_" + str(date)+".gz"
+    file_name = db_selected['database'] + "_" + str(date)+".gz"
+    path_backup = directory + file_name
 
-    os.system("bash " + absolute_path + "/scripts/mongodb.bash " + db_selected['host'] + " " + db_selected['port'] + " " + db_selected['database'] + " " + db_selected['user'] + " " + " " + db_selected['password'] + " " + path_backup)
+    os.system("bash " + absolute_path + "/scripts/mongodb.bash " + db_selected['host'] + " " + db_selected['port'] +
+              " " + db_selected['database'] + " " + db_selected['user'] + " " + " " + db_selected['password'] + " " + path_backup)
 
-    insert_log("Backup successfully created in " + directory)
-    upload_file(directory)
+    upload_single_file(directory, file_name)

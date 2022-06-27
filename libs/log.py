@@ -1,13 +1,5 @@
-"""
-* Made by: Leonel López
-* Email: lalopez@cultura.gob.sv
-* Date: 5/10/2022
-* Description: Function to create backups for: MySql, PostgreSQL and MongoDB.
-"""
-
 from datetime import datetime
 import pathlib
-
 
 absolute_path = pathlib.Path(__file__).parent.parent.resolve()
 
