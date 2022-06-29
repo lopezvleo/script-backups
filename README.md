@@ -26,4 +26,10 @@ Give all the permissions to the folder
 
 ## Create the cron
 
-    0 1 * * * /usr/bin/python3 /home/ubuntu/script-backups/main.py
+Sh to backup the DBs
+
+    0 1 * * * sh /home/user_local/script-backups/scripts/backup-command.sh
+
+Sh to delete the local copy of the DB every month
+
+    0 0 1 * * sh /home/user_local/script-backups/scripts/backup-delete.sh

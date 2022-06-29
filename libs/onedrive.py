@@ -18,16 +18,20 @@ absolute_path = str(pathlib.Path(__file__).parent.parent.resolve())
 
 # Function will upload the files in the backup directory
 def upload_file(directory):
+    insert_log("Uploading backups")
+
     for root, dirs, files in os.walk(directory):
         for file_name in files:
             if(file_name != '.gitignore'):
-                upload_single_file(root, file_name)
+                insert_log(
+                    "Uploading file: {}/{}".format(directory, file_name))
+                upload_single_file(directory, file_name)
 
-    insert_log("Files succesfully uploaded")
+    insert_log("Backups succesfully uploaded")
 
 
 def upload_single_file(directory, file_name):
-
+    insert_log("Uploading file: {}/{}".format(directory, file_name))
     TOKEN = authenticate()
 
     file_path = os.path.join(directory, file_name)
@@ -78,7 +82,7 @@ def upload_single_file(directory, file_name):
                 response = requests.put(
                     upload_session['uploadUrl'], data=chunk_data, headers=headers)
 
-                print(response)
+                insert_log(response.text)
                 print(response.json())
 
                 i = i + 1
