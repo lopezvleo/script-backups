@@ -3,10 +3,11 @@ from datetime import datetime
 import pathlib
 from libs.log import insert_log
 from libs.onedrive import upload_single_file
+from credentials import date_format
 
 # Getting the path of the current folder
 absolute_path = str(pathlib.Path(__file__).parent.parent.resolve())
-date = datetime.today().strftime('%d_%m_%Y')
+date = datetime.today().strftime(date_format)
 
 
 def mysql(db_selected):

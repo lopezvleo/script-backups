@@ -28,8 +28,8 @@ Give all the permissions to the folder
 
 Sh to backup the DBs
 
-    0 1 * * * sh /home/user_local/script-backups/scripts/backup-command.sh
+    0 1 * * * sh /home/user_local/script-backups/scripts/backup.bash
 
 Sh to delete the local copy of the DB every month
 
-    0 0 1 * * sh /home/user_local/script-backups/scripts/backup-delete.sh
+    0 0 1 * * sh /home/user_local/script-backups/scripts/delete.bash
