@@ -45,8 +45,5 @@ onedrive = {
 # ID of the institution
 onedrive_tenant_id = 'tenant_id'
 
-# If remove_local_copy enabled, the backups directory will be deleted after upload
-remove_local_copy = True
-
 # File date format to be generated, for ex: db_name_30_06.sql
 date_format = '%d_%m'
