@@ -4,11 +4,11 @@ import webbrowser
 import os
 import requests
 import json
-from credentials import onedrive, onedrive_tenant_id, remove_local_copy
+from credentials import onedrive, onedrive_tenant_id, remove_local_copy, date_format
 from libs.log import insert_log
 import msal
 
-date = datetime.today().strftime('%d_%m_%Y')
+date = datetime.today().strftime(date_format)
 RESOURCE_URL = 'https://graph.microsoft.com/'
 API_VERSION = 'v1.0'
 onedrive_destination = '{}/{}/me/drive/root:/backups/{}'.format(
@@ -94,11 +94,7 @@ def upload_single_file(directory, file_name):
     backup_local = os.path.join(absolute_path, "backups-local")
 
     # If remove_local_copy enabled, the backups directory will be deleted after upload
-    if remove_local_copy and response.status_code == 200 or response.status_code == 201:
-        # remove folder contents
-        insert_log("Succeeded, not removing original file...")
-        # os.remove(os.path.join(directory, file_name))
-    else:
+    if response.status_code == 200 or response.status_code == 201:
         insert_log("Succeeded, moving original file...")
         # if file exists replace else move
         if os.path.exists(os.path.join(backup_local, file_name)):
