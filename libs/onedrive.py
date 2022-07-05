@@ -4,7 +4,7 @@ import webbrowser
 import os
 import requests
 import json
-from credentials import onedrive, onedrive_tenant_id, remove_local_copy, date_format
+from credentials import onedrive, onedrive_tenant_id, date_format
 from libs.log import insert_log
 import msal
 
@@ -93,7 +93,7 @@ def upload_single_file(directory, file_name):
 
     backup_local = os.path.join(absolute_path, "backups-local")
 
-    # If remove_local_copy enabled, the backups directory will be deleted after upload
+    # I enabled, the backups directory will be deleted after upload
     if response.status_code == 200 or response.status_code == 201:
         insert_log("Succeeded, moving original file...")
         # if file exists replace else move
